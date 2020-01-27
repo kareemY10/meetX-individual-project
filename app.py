@@ -3,14 +3,11 @@ from flask import Flask, request, redirect, url_for, render_template
 from flask import session as login_session
 
 app = Flask(__name__)
-app.secret_key = "MY_SUPER_SECRET_KEY"
+app.secret_key = "lkasjjsa;ijcz;/osidjc;zsdicm;z/sdijc;z/sdijc;zsod/icjml"
 
  
 ##### Code here ######
-@app.route('/')
-def homepage():
-	return render_template("home.html")
-
+ 
 
 @app.route('/DeleverySign',methods=['GET','POST'])
 def signD():
@@ -29,7 +26,7 @@ def signD():
 
 
 
-@app.route('/login',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def login():
     if request.method=="GET":
         return render_template("login.html")
@@ -37,10 +34,15 @@ def login():
         user = check_username(request.form['Name'])
         if user!=None and user.verify_password(request.form["password"]):
              
-            return "logedin"
-     
+            return "logedin Coustmer"
+        user=Check_DUsername(request.form['Name'])
+        if user!=None and user.verify_password(request.form["password"]):
+            return render_template("delevery.html",name=request.form['Name'])
+             
+        
     return "wrong password or username"
         
+
 @app.route('/sign',methods=['GET','POST'])
 
 def sign():
